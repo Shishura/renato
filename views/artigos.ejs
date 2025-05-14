@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Artigos</title>
+</head>
+<body>
+    <h1>Lista de Artigos</h1>
+    <ul>
+        <% artigos.forEach(function(artigo) { %>
+            <li>
+                <strong><%= artigo.titulo %></strong> - <%= artigo.descricao %>
+                (Autor: <%= artigo.autor %>, Páginas: <%= artigo.paginas %>)
+            </li>
+        <% }); %>
+    </ul>
+</body>
+</html>
