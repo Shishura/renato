@@ -1,7 +1,11 @@
 const express = require('express'); // Importa o módulo express para criar o servidor
 const path = require('path'); // Importa o módulo path para manipulação de diretórios e caminhos
 const app = express(); // Inicializa a aplicação express
-const port = 3000; // Define a porta do servidor como 3000
+const port = 3000; // Define a porta do servidor como 30
+const conexao = require('./conexao');
+const Tabela = require('./tabela')
+
+tabela.init(conexao)
 
 app.use(express.json()); // Middleware para permitir JSON no body das requisições
 app.use(express.urlencoded({ extended: true })); // Middleware para permitir envio de dados via URL
@@ -9,6 +13,7 @@ app.use(express.static('public')); // Define a pasta "public" para servir arquiv
 app.set('view engine', 'ejs'); // Define EJS como o motor de template para renderização de páginas HTML
 
 const artigoRoutes = require('./routes/artigoRoutes'); // Importa as rotas de artigos
+const tabela = require('./tabela');
 app.use('/artigos', artigoRoutes); // Usa as rotas de artigos no caminho "/artigos"
 
 app.get('/', (req, res) => {
