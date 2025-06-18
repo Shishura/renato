@@ -1,13 +1,14 @@
+const ticket = require('../models/ticket');
 const Ticket = require('../models/ticket');
 
 class TicketsController {
-    async buscarTodosTickets(req, res) {
-        try {
-            const resultado = await Ticket.listarTodos();
-            res.status(200).json(resultado);
-        } catch (error) {
-            res.status(500).json({ mensagem: 'Erro ao listar tickets', erro: error.message });
-        }
+  cadastrarTicket(req, res) {
+    const { titulo, descricao, dataAbertura, resolvido } = req.body;
+    const novoTicket = { titulo: titulo, descricao: descricao, dataAbertura: dataAbertura, resolvido: resolvido, userID: req.userId };
+    const ticktSalvo = ticket.criar(novoTicket);
+    ticketSalvo
+        .then(usuario => res.status(200).json(usuario))
+        .catch(erro => res.status(500).json(erro.message));
     }
 
     async buscarPorId(req, res) {

@@ -28,14 +28,15 @@ class Ticket {
     }
 
     criar(novoTicket) {
-        const sql = 'INSERT INTO tickets SET ?';
+        const { titulo,descricao,dataAbertura,resolvido,userID} = novoTicket
+        const sql = 'INSERT INTO tickets (titulo,descricao,dataAbertura,resolvido,userID)VALUES (?,?,?,?,?)';
         return new Promise((resolve, reject) => {
-            conexao.query(sql, novoTicket, (error, resposta) => {
+            conexao.query(sql, [titulo,descricao,dataAbertura,resolvido,userID], (error, resposta) => {
                 if (error) {
                     console.log('Erro ao criar ticket:', error.message);
                     reject(error);
                 }
-                resolve({ id: resposta.insertId, ...novoTicket });
+                resolve({ id: resposta.insertId,titulo,descricao,dataAbertura,resolvido,userID });
             });
         });
     }

@@ -1,25 +1,25 @@
-const express = require('express'); // Importa o módulo express para criar o servidor
-const path = require('path'); // Importa o módulo path para manipulação de diretórios e caminhos
-const app = express(); // Inicializa a aplicação express
-const port = 3000; // Define a porta do servidor como 30
+const express = require('express');
+const path = require('path');
+const app = express();
+const port = 3000;
 const conexao = require('./conexao');
-const Tabela = require('./tabela')
-
-tabela.init(conexao)
-
-app.use(express.json()); // Middleware para permitir JSON no body das requisições
-app.use(express.urlencoded({ extended: true })); // Middleware para permitir envio de dados via URL
-app.use(express.static('public')); // Define a pasta "public" para servir arquivos estáticos (CSS, imagens, JS)
-app.set('view engine', 'ejs'); // Define EJS como o motor de template para renderização de páginas HTML
-
-const artigoRoutes = require('./routes/artigoRoutes'); // Importa as rotas de artigos
 const tabela = require('./tabela');
-app.use('/artigos', artigoRoutes); // Usa as rotas de artigos no caminho "/artigos"
 
-app.get('/', (req, res) => {
-    res.render('index'); // Responde com a string "index" para requisições na raiz da aplicação
-});
+criarTabelaUsuarios.init(conexao);
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
+app.set('view engine', 'ejs');
+app.use(express.json());
+
+
+const ticketRoutes = require('./routes/ticketsRoutes');
+const usuarioRoutes = require('./routes/usuarios');
+
+app.use('/tickets', ticketRoutes);
+app.use('/usuarios', usuarioRoutes);
+
 
 app.listen(port, () => {
-    console.log(`Servidor escutando na porta http://localhost:${port}`); // Inicia o servidor na porta especificada e exibe mensagem no console
+    console.log(`Servidor rodando em http://localhost:${port}`);
 });

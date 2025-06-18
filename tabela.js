@@ -4,6 +4,24 @@ class Tabela{
         this.criarTabelaTickets();
     }
 
+    
+
+criarTabelaUsuarios(){
+    const sql = `
+        CREATE TABLE IF NOT EXISTS usuarios(
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            nome VARCHAR(255) NOT NULL UNIQUE,
+            senha VARCHAR (255) NOT NULL 
+           );`;
+
+
+    this.conexao.query(sql,(error)=>{
+        if(error){
+            comsole.log(error.message);
+        }
+        console.log('Tabela criada com sucesso')
+    })
+}
     criarTabelaTickets(){
         const sql = `
                 CREATE TABLE IF NOT EXIST tickts(
@@ -19,4 +37,4 @@ class Tabela{
                 });
     }
 }
-module.exports = new Tabela();
+module.exports = new Tabela(); 
